@@ -35,7 +35,7 @@ app.add_middleware(
 router = APIRouter()
 router_v1 = APIRouter(prefix="/v1")
 
-from .routes import health, network_details
+from .routes import health, network, mask, ip
 
 router.include_router(router_v1)
 app.include_router(router)
