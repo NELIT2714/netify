@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <!-- / -->
+    <url>
+        <loc>https://nelit.dev/</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <url>
+        <loc>https://nelit.dev/en/</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    <url>
+        <loc>https://nelit.dev/pl/</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    <url>
+        <loc>https://nelit.dev/uk/</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    <url>
+        <loc>https://nelit.dev/ru/</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <!-- about -->
+    <url>
+        <loc>https://nelit.dev/en/about/</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://nelit.dev/pl/about/</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://nelit.dev/uk/about/</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://nelit.dev/ru/about/</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <!--  contact  -->
+    <url>
+        <loc>https://nelit.dev/en/contact/</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://nelit.dev/pl/contact/</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://nelit.dev/uk/contact/</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://nelit.dev/ru/contact/</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+
+    <!-- projects -->
+<!--    <url>-->
+<!--        <loc>https://nelit.dev/en/projects/</loc>-->
+<!--        <lastmod>2024-12-19</lastmod>-->
+<!--        <changefreq>yearly</changefreq>-->
+<!--        <priority>0.9</priority>-->
+<!--    </url>-->
+<!--    <url>-->
+<!--        <loc>https://nelit.dev/pl/projects/</loc>-->
+<!--        <lastmod>2024-12-19</lastmod>-->
+<!--        <changefreq>yearly</changefreq>-->
+<!--        <priority>0.9</priority>-->
+<!--    </url>-->
+<!--    <url>-->
+<!--        <loc>https://nelit.dev/uk/projects/</loc>-->
+<!--        <lastmod>2024-12-19</lastmod>-->
+<!--        <changefreq>yearly</changefreq>-->
+<!--        <priority>0.9</priority>-->
+<!--    </url>-->
+<!--    <url>-->
+<!--        <loc>https://nelit.dev/ru/projects/</loc>-->
+<!--        <lastmod>2024-12-19</lastmod>-->
+<!--        <changefreq>yearly</changefreq>-->
+<!--        <priority>0.9</priority>-->
+<!--    </url>-->
+</urlset>
