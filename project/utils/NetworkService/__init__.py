@@ -57,6 +57,9 @@ class NetworkService:
         self.ip_converter = IPConverter()
 
     async def get_ip_status(self):
+        if self.ip == "127.0.0.1":
+            return "Localhost"
+
         first_octet, second_octet, *_ = map(int, self.ip.split("."))
         if (first_octet == 10) or (first_octet == 172 and 16 <= second_octet <= 31) or (first_octet == 192 and second_octet == 168):
             return "Private"
@@ -64,13 +67,15 @@ class NetworkService:
         return "Public"
 
     async def get_ip_class(self):
+        print(self.ip)
         try:
             first_octet = int(self.ip.split(".")[0])
+            print(first_octet)
         except (ValueError, IndexError):
-            raise ValueError("Invalid IP address")
+            raise HTTPException(status_code=400, detail="Invalid IP address")
 
         ip_classes = {
-            range(1, 127): "A",
+            range(1, 128): "A",
             range(128, 192): "B",
             range(192, 224): "C",
             range(224, 240): "D (Multicast)",
@@ -78,10 +83,11 @@ class NetworkService:
         }
 
         for ip_range, ip_class in ip_classes.items():
+            print(ip_range, ip_class)
             if first_octet in ip_range:
                 return ip_class
 
-        raise ValueError("Invalid IP address")
+        raise HTTPException(status_code=400, detail="Invalid IP address")
 
     async def get_network_address(self):
         ip_binary = await self.ip_converter.ip_to_binary(self.ip)
