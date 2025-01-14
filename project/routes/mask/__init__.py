@@ -20,10 +20,10 @@ async def mask_to_cidr_endpoint(prefix: int = Path(..., ge=1, le=32)):
 @mask_router.get("/ip/{mask_ip}/")
 async def mask_to_cidr_endpoint(mask_ip: str):
     ip_converter = IPConverter()
-    ip_mask = await ip_converter.mask_ip_to_prefix(mask_ip)
+    prefix = await ip_converter.mask_ip_to_prefix(mask_ip)
 
     return JSONResponse(status_code=200, content={
-        "ip_mask": ip_mask,
+        "prefix": prefix,
     })
 
 
