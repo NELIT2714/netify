@@ -1,11 +1,19 @@
 <script>
-	import { getNetworkDetails } from "/src/lib/js/netifyFunctions.js";
+	import {
+		convertBinaryToIP,
+		convertIPToBinary,
+		convertMaskToPrefix,
+		convertPrefixToMask,
+		getNetworkDetails,
+	} from "/src/lib/js/netifyFunctions.js";
 	import Modal from "$lib/components/ui/+modal.svelte";
 
 	let netifyFunc = "0";
-	let ipAddress = "192.168.0.1";
+	let ipAddress = "";
 	let subnetPrefix = 24;
 	let binaryIPAddress = "11000000101010000000000000000001";
+
+	let errorMessage;
 
 	const subnetPrefixes = Array.from({ length: 31 }, (_, index) => index + 1);
 	const netifyFunctions = [
@@ -27,41 +35,92 @@
 		switch (netifyFunc) {
 			case "0":
 				data = await getNetworkDetails(ipAddress, subnetPrefix);
+				break;
+			case "1":
+				data = await convertPrefixToMask(subnetPrefix);
+				break;
+			case "2":
+				data = await convertMaskToPrefix(ipAddress);
+				break;
+			case "3":
+				data = await convertIPToBinary(ipAddress);
+				break;
+			case "4":
+				data = await convertBinaryToIP(binaryIPAddress);
+				break;
 		}
-		resultModalToggle();
+		errorMessage = data ? null : "An internal application error occurred. Please check your input and try again";
+
+		if (!errorMessage) {
+			resultModalToggle();
+		}
 	};
 </script>
 
 {#if resultModal}
 	<Modal title="Result" closeFunc={resultModalToggle}>
-		<div class="flex flex-col gap-5">
-			<div class="flex flex-col gap-2">
-				<p class="text-gray-400 text-[11pt]"><strong class="text-gray-200">Address:</strong> {data.ip.address}
-				</p>
-				<p class="text-gray-400 text-[11pt]"><strong class="text-gray-200">Mask:</strong> {data.subnet_mask}
-					({subnetPrefix})</p>
-				<p class="text-gray-400 text-[11pt]"><strong class="text-gray-200">Class:</strong> {data.ip.ip_class}
-				</p>
-				<p class="text-gray-400 text-[11pt]"><strong class="text-gray-200">Status:</strong> {data.ip.ip_status}
-				</p>
+
+		{#if netifyFunc === "0"}
+
+			<div class="flex flex-col gap-5">
+				<div class="flex flex-col gap-2">
+					<p class="text-gray-400 text-[11pt]"><strong
+						class="text-gray-200">Address:</strong> {data.ip.address}
+					</p>
+					<p class="text-gray-400 text-[11pt]"><strong class="text-gray-200">Mask:</strong> {data.subnet_mask}
+						({subnetPrefix})</p>
+					<p class="text-gray-400 text-[11pt]"><strong
+						class="text-gray-200">Class:</strong> {data.ip.ip_class}
+					</p>
+					<p class="text-gray-400 text-[11pt]"><strong
+						class="text-gray-200">Status:</strong> {data.ip.ip_status}
+					</p>
+				</div>
+
+				<div class="flex flex-col gap-2">
+					<p class="text-gray-400 text-[11pt]"><strong class="text-gray-200">Network
+						IP:</strong> {data.network.ip}</p>
+					<p class="text-gray-400 text-[11pt]"><strong
+						class="text-gray-200">Hosts:</strong> {data.network.hosts.toLocaleString()}</p>
+					<p class="text-gray-400 text-[11pt]"><strong
+						class="text-gray-200">Subnets:</strong> {data.network.subnets.toLocaleString()}</p>
+					<p class="text-gray-400 text-[11pt]"><strong
+						class="text-gray-200">Broadcast:</strong> {data.network.broadcast}</p>
+				</div>
 			</div>
 
+		{:else if netifyFunc === "1"}
+
 			<div class="flex flex-col gap-2">
-				<p class="text-gray-400 text-[11pt]"><strong class="text-gray-200">Network
-					IP:</strong> {data.network.ip}</p>
-				<p class="text-gray-400 text-[11pt]"><strong
-					class="text-gray-200">Hosts:</strong> {data.network.hosts.toLocaleString()}</p>
-				<p class="text-gray-400 text-[11pt]"><strong
-					class="text-gray-200">Subnets:</strong> {data.network.subnets.toLocaleString()}</p>
-				<p class="text-gray-400 text-[11pt]"><strong
-					class="text-gray-200">Broadcast:</strong> {data.network.broadcast}</p>
+				<p class="text-gray-400 text-[11pt]"><strong class="text-gray-200">Mask: </strong> {data.ip_mask}</p>
 			</div>
-		</div>
+
+		{:else if netifyFunc === "2"}
+
+			<div class="flex flex-col gap-2">
+				<p class="text-gray-400 text-[11pt]"><strong class="text-gray-200">Prefix: </strong> {data.prefix}</p>
+			</div>
+
+		{:else if netifyFunc === "3"}
+
+			<div class="flex flex-col gap-2">
+				<p class="text-gray-400 text-[11pt]"><strong class="text-gray-200">Binary IP
+					Address: </strong> {data.ip_address_binary.match(/.{1,8}/g).join(".")}</p>
+			</div>
+
+		{:else if netifyFunc === "4"}
+
+			<div class="flex flex-col gap-2">
+				<p class="text-gray-400 text-[11pt]"><strong class="text-gray-200">IP
+					Address: </strong> {data.ip_address}</p>
+			</div>
+
+		{/if}
 	</Modal>
 {/if}
 
 <section class="flex justify-center items-center" style="height: calc(var(--vh, 1vh) * 100)">
-	<form class="w-[400px]" on:submit|preventDefault={submitForm}>
+	<form class="w-[400px]" on:submit|preventDefault={submitForm} on:change={errorMessage = null}>
 		<div class="flex flex-col gap-3">
 			<div class="text-center mb-3">
 				<h1 class="text-white text-2xl font-bold">Network Management</h1>
@@ -145,6 +204,12 @@
 
 				{/if}
 			</div>
+
+			{#if errorMessage}
+				<div>
+					<p class="empty:hidden text-sm text-[#FF4D4D]">{errorMessage}</p>
+				</div>
+			{/if}
 
 			<div class="w-full">
 				<button
