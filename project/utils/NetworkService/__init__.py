@@ -67,10 +67,8 @@ class NetworkService:
         return "Public"
 
     async def get_ip_class(self):
-        print(self.ip)
         try:
             first_octet = int(self.ip.split(".")[0])
-            print(first_octet)
         except (ValueError, IndexError):
             raise HTTPException(status_code=400, detail="Invalid IP address")
 
@@ -83,7 +81,6 @@ class NetworkService:
         }
 
         for ip_range, ip_class in ip_classes.items():
-            print(ip_range, ip_class)
             if first_octet in ip_range:
                 return ip_class
 
