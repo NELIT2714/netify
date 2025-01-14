@@ -1,0 +1,21 @@
+services:
+
+  netify_web:
+    container_name: "netify_web"
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    ports:
+      - "4422:4422"
+
+  netify_api:
+    container_name: "netify_api"
+    build:
+      context: ./back
+      dockerfile: Dockerfile
+    environment:
+      - API_MODE=PROD
+      - API_HOST=0.0.0.0
+      - API_PORT=8822
+    ports:
+      - "8822:8822"
