@@ -1,4 +1,4 @@
-name: Deploy Netify.tools
+name: Deploy netify.tools
 
 on:
   push:
