@@ -23,6 +23,5 @@ jobs:
           script: |
             cd /home/owner/projects/netify
             git pull origin master
-            docker-compose down netify_web netify_api nginx
-            docker-compose up netify_web netify_api --build -d
-            docker-compose up nginx -d
+            docker-compose down netify_frontend netify_backend
+            docker-compose up netify_frontend netify_backend --build -d
