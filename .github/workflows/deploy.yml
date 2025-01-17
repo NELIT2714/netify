@@ -23,6 +23,6 @@ jobs:
           script: |
             cd /home/owner/projects/netify
             git pull --recurse-submodules origin master --rebase
-            docker-compose down netify_frontend netify_backend
+            docker-compose down netify_frontend netify_backend nginx
             docker-compose up netify_frontend netify_backend --build -d
             docker-compose up nginx -d
