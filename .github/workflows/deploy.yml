@@ -22,7 +22,7 @@ jobs:
           port: ${{ secrets.SERVER_PORT }}
           script: |
             cd /home/owner/projects/netify
-            git pull origin master
+            git pull origin master --rebase
             docker-compose down netify_frontend netify_backend
             docker-compose up netify_frontend netify_backend --build -d
             docker-compose up nginx -d
